@@ -21,6 +21,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+  } from "@/components/ui/tooltip"
 
 const CHAT_STORAGE_KEY = 'curhatai-chat';
 const INITIAL_MESSAGE: Message = { role: 'assistant', content: 'Halo! Ada yang bisa aku bantu hari ini? Kamu bisa cerita apa saja kepadaku.' };
@@ -104,34 +110,49 @@ export default function ChatPage() {
   }
 
   return (
+    <TooltipProvider>
     <div className="flex h-full max-h-[calc(100svh-2rem)] flex-col">
-       <header className="flex items-center justify-between p-4 border-b">
+       <header className="flex items-center justify-between p-2 md:p-4 border-b">
          <h2 className="text-xl font-bold">Chat</h2>
-         <div className="flex gap-2">
-           <Button variant="outline" size="sm" onClick={startNewChat}>
-             <PlusCircle className="mr-2 h-4 w-4" />
-             Chat Baru
-           </Button>
-           <AlertDialog>
-             <AlertDialogTrigger asChild>
-                <Button variant="destructive" size="sm" disabled={messages.length === 0}>
-                  <Trash2 className="mr-2 h-4 w-4" />
-                  Hapus Chat
-                </Button>
-             </AlertDialogTrigger>
-             <AlertDialogContent>
-               <AlertDialogHeader>
-                 <AlertDialogTitle>Apakah kamu yakin?</AlertDialogTitle>
-                 <AlertDialogDescription>
-                    Tindakan ini akan menghapus semua riwayat percakapan secara permanen dari perangkat ini.
-                 </AlertDialogDescription>
-               </AlertDialogHeader>
-               <AlertDialogFooter>
-                 <AlertDialogCancel>Batal</AlertDialogCancel>
-                 <AlertDialogAction onClick={deleteChat}>Hapus</AlertDialogAction>
-               </AlertDialogFooter>
-             </AlertDialogContent>
-           </AlertDialog>
+         <div className="flex gap-1">
+            <Tooltip>
+                <TooltipTrigger asChild>
+                    <Button variant="ghost" size="icon" onClick={startNewChat}>
+                        <PlusCircle className="h-5 w-5" />
+                        <span className="sr-only">Chat Baru</span>
+                    </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                    <p>Chat Baru</p>
+                </TooltipContent>
+            </Tooltip>
+            <AlertDialog>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <AlertDialogTrigger asChild>
+                            <Button variant="ghost" size="icon" disabled={messages.length === 0} className="text-destructive hover:text-destructive hover:bg-destructive/10">
+                                <Trash2 className="h-5 w-5" />
+                                <span className="sr-only">Hapus Chat</span>
+                            </Button>
+                        </AlertDialogTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Hapus Chat</p>
+                    </TooltipContent>
+                </Tooltip>
+                <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogTitle>Apakah kamu yakin?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                        Tindakan ini akan menghapus semua riwayat percakapan secara permanen dari perangkat ini.
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogCancel>Batal</AlertDialogCancel>
+                    <AlertDialogAction onClick={deleteChat} className={cn(buttonVariants({variant: "destructive"}))}>Hapus</AlertDialogAction>
+                </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
          </div>
        </header>
       <ScrollArea className="flex-1" ref={scrollAreaRef}>
@@ -214,5 +235,6 @@ export default function ChatPage() {
         </form>
       </div>
     </div>
+    </TooltipProvider>
   );
 }
