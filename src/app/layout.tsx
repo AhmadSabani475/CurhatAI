@@ -21,7 +21,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         <div className="flex flex-col min-h-svh">
-            <main className="flex-1">{children}</main>
+            <div className="flex-1">{children}</div>
             <footer className="p-4 text-center text-sm text-muted-foreground border-t">
                 © 2025 Ahmad Rizki Sabani. All Rights Reserved.
             </footer>
