@@ -123,8 +123,13 @@ export default function MainLayout({
         </SidebarContent>
       </Sidebar>
       <SidebarInset>
-        <Topbar />
-        {children}
+        <div className="flex flex-col min-h-svh">
+            <Topbar />
+            <main className="flex-1">{children}</main>
+            <footer className="p-4 text-center text-sm text-muted-foreground border-t">
+                © 2024 Ahmad Rizki Sabani. All Rights Reserved.
+            </footer>
+        </div>
         </SidebarInset>
     </SidebarProvider>
   );
