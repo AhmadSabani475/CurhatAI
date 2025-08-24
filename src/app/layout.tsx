@@ -20,10 +20,15 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
-        <>
-          {children}
-          <Toaster />
-        </>
+        <div className="flex flex-col min-h-svh">
+            <main className="flex-1 flex">
+                {children}
+            </main>
+            <footer className="p-4 text-center text-sm text-muted-foreground border-t">
+                © 2025 Ahmad Rizki Sabani. All Rights Reserved.
+            </footer>
+        </div>
+        <Toaster />
       </body>
     </html>
   );
