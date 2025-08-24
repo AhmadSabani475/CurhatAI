@@ -10,6 +10,7 @@ import {
   History,
   LayoutDashboard,
   MessageSquare,
+  PanelLeft,
 } from 'lucide-react';
 import {
   Sidebar,
@@ -22,6 +23,30 @@ import {
   SidebarTrigger,
   SidebarContent,
 } from '@/components/ui/sidebar';
+import { Button } from '@/components/ui/button';
+import { useSidebar } from '@/components/ui/sidebar';
+
+
+function Topbar() {
+    const { toggleSidebar } = useSidebar()
+    return (
+        <div className="md:hidden flex items-center p-2 border-b bg-background/80 backdrop-blur-sm sticky top-0 z-10">
+             <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8"
+                onClick={toggleSidebar}
+            >
+                <PanelLeft />
+                <span className="sr-only">Toggle Sidebar</span>
+            </Button>
+            <div className="flex items-center gap-2 ml-2">
+                 <Bot className="size-7 text-primary" />
+                <h1 className="text-lg font-bold font-headline">CurhatAi</h1>
+            </div>
+        </div>
+    )
+}
 
 export default function MainLayout({
   children,
@@ -97,7 +122,10 @@ export default function MainLayout({
           </SidebarMenu>
         </SidebarContent>
       </Sidebar>
-      <SidebarInset>{children}</SidebarInset>
+      <SidebarInset>
+        <Topbar />
+        {children}
+        </SidebarInset>
     </SidebarProvider>
   );
 }
