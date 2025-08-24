@@ -57,77 +57,84 @@ export default function MainLayout({
 
   return (
     <SidebarProvider>
-      <Sidebar>
-        <SidebarHeader>
-          <div className="flex items-center gap-2 p-2">
-            <Bot className="size-8 text-primary" />
-            <h1 className="text-xl font-bold font-headline">CurhatAi</h1>
-            <SidebarTrigger className="ml-auto" />
-          </div>
-        </SidebarHeader>
-        <SidebarContent>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                href="/chat"
-                isActive={pathname.startsWith('/chat')}
-                tooltip="Chat"
-              >
-                <Link href="/chat">
-                  <MessageSquare />
-                  <span>Chat</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                href="/dashboard"
-                isActive={pathname.startsWith('/dashboard')}
-                tooltip="Dashboard"
-              >
-                <Link href="/dashboard">
-                  <LayoutDashboard />
-                  <span>Dashboard</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                href="/resources"
-                isActive={pathname.startsWith('/resources')}
-                tooltip="Resources"
-              >
-                <Link href="/resources">
-                  <BookHeart />
-                  <span>Resources</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                href="/history"
-                isActive={pathname.startsWith('/history')}
-                tooltip="History"
-              >
-                <Link href="/history">
-                  <History />
-                  <span>History</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarContent>
-      </Sidebar>
-      <SidebarInset>
-        <div className="flex flex-col flex-1">
-            <Topbar />
-            <div className="flex-1">{children}</div>
+        <div className="flex flex-col min-h-svh">
+            <div className="flex flex-1">
+                <Sidebar>
+                    <SidebarHeader>
+                    <div className="flex items-center gap-2 p-2">
+                        <Bot className="size-8 text-primary" />
+                        <h1 className="text-xl font-bold font-headline">CurhatAi</h1>
+                        <SidebarTrigger className="ml-auto" />
+                    </div>
+                    </SidebarHeader>
+                    <SidebarContent>
+                    <SidebarMenu>
+                        <SidebarMenuItem>
+                        <SidebarMenuButton
+                            asChild
+                            href="/chat"
+                            isActive={pathname.startsWith('/chat')}
+                            tooltip="Chat"
+                        >
+                            <Link href="/chat">
+                            <MessageSquare />
+                            <span>Chat</span>
+                            </Link>
+                        </SidebarMenuButton>
+                        </SidebarMenuItem>
+                        <SidebarMenuItem>
+                        <SidebarMenuButton
+                            asChild
+                            href="/dashboard"
+                            isActive={pathname.startsWith('/dashboard')}
+                            tooltip="Dashboard"
+                        >
+                            <Link href="/dashboard">
+                            <LayoutDashboard />
+                            <span>Dashboard</span>
+                            </Link>
+                        </SidebarMenuButton>
+                        </SidebarMenuItem>
+                        <SidebarMenuItem>
+                        <SidebarMenuButton
+                            asChild
+                            href="/resources"
+                            isActive={pathname.startsWith('/resources')}
+                            tooltip="Resources"
+                        >
+                            <Link href="/resources">
+                            <BookHeart />
+                            <span>Resources</span>
+                            </Link>
+                        </SidebarMenuButton>
+                        </SidebarMenuItem>
+                        <SidebarMenuItem>
+                        <SidebarMenuButton
+                            asChild
+                            href="/history"
+                            isActive={pathname.startsWith('/history')}
+                            tooltip="History"
+                        >
+                            <Link href="/history">
+                            <History />
+                            <span>History</span>
+                            </Link>
+                        </SidebarMenuButton>
+                        </SidebarMenuItem>
+                    </SidebarMenu>
+                    </SidebarContent>
+                </Sidebar>
+                <SidebarInset>
+                    <div className="flex flex-col flex-1">
+                        <Topbar />
+                        <div className="flex-1">{children}</div>
+                    </div>
+                </SidebarInset>
+            </div>
+             <footer className="p-4 text-center text-sm text-muted-foreground border-t">
+                © 2025 Ahmad Rizki Sabani. All Rights Reserved.
+            </footer>
         </div>
-        </SidebarInset>
     </SidebarProvider>
   );
 }
