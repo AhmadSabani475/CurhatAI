@@ -24,9 +24,6 @@ export default function RootLayout({
             <main className="flex-1 flex">
                 {children}
             </main>
-            <footer className="p-4 text-center text-sm text-muted-foreground border-t">
-                © 2025 Ahmad Rizki Sabani. All Rights Reserved.
-            </footer>
         </div>
         <Toaster />
       </body>

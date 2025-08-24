@@ -139,6 +139,9 @@ export default function ChatPage() {
           )}
         </div>
       </ScrollArea>
+       <footer className="p-2 text-center text-xs text-muted-foreground">
+        © 2025 Ahmad Rizki Sabani. All Rights Reserved.
+      </footer>
       <div className="border-t bg-background/80 p-2 md:p-4 backdrop-blur-sm">
         <form
           onSubmit={handleSubmit}
