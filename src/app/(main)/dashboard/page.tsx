@@ -9,7 +9,7 @@ import { BrainCircuit, Loader2, Sparkles } from 'lucide-react';
 import { EmotionChart } from '@/components/emotion-chart';
 import { Badge } from '@/components/ui/badge';
 
-const CHAT_STORAGE_KEY = 'remajaku-chat';
+const CHAT_STORAGE_KEY = 'curhatai-chat';
 
 type AnalysisResult = {
   topics: string[];

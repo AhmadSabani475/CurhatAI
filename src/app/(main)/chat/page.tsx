@@ -11,7 +11,7 @@ import { Bot, Send, User } from 'lucide-react';
 import * as React from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 
-const CHAT_STORAGE_KEY = 'remajaku-chat';
+const CHAT_STORAGE_KEY = 'curhatai-chat';
 
 export default function ChatPage() {
   const [messages, setMessages] = React.useState<Message[]>([]);

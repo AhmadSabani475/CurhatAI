@@ -34,7 +34,7 @@ export default function MainLayout({
         <SidebarHeader>
           <div className="flex items-center gap-2 p-2">
             <Bot className="size-8 text-primary" />
-            <h1 className="text-xl font-bold font-headline">RemajaKu</h1>
+            <h1 className="text-xl font-bold font-headline">CurhatAi</h1>
             <SidebarTrigger className="ml-auto" />
           </div>
         </SidebarHeader>
