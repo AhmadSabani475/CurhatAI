@@ -1,17 +1,29 @@
 'use client';
 
 import { getAiResponse } from '@/lib/actions';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import type { Message } from '@/types';
-import { Bot, Send, User } from 'lucide-react';
+import { Bot, Send, User, Trash2, PlusCircle } from 'lucide-react';
 import * as React from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 const CHAT_STORAGE_KEY = 'curhatai-chat';
+const INITIAL_MESSAGE: Message = { role: 'assistant', content: 'Halo! Ada yang bisa aku bantu hari ini? Kamu bisa cerita apa saja kepadaku.' };
 
 export default function ChatPage() {
   const [messages, setMessages] = React.useState<Message[]>([]);
@@ -28,15 +40,11 @@ export default function ChatPage() {
       if (storedMessages) {
         setMessages(JSON.parse(storedMessages));
       } else {
-        setMessages([
-            { role: 'assistant', content: 'Halo! Ada yang bisa aku bantu hari ini? Kamu bisa cerita apa saja kepadaku.' }
-        ]);
+        setMessages([INITIAL_MESSAGE]);
       }
     } catch (error) {
       console.error("Failed to parse messages from localStorage", error);
-      setMessages([
-        { role: 'assistant', content: 'Halo! Ada yang bisa aku bantu hari ini? Kamu bisa cerita apa saja kepadaku.' }
-      ]);
+      setMessages([INITIAL_MESSAGE]);
     }
   }, []);
 
@@ -56,6 +64,15 @@ export default function ChatPage() {
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput(e.target.value);
   };
+
+  const startNewChat = () => {
+    setMessages([INITIAL_MESSAGE]);
+  }
+
+  const deleteChat = () => {
+    setMessages([]);
+    localStorage.removeItem(CHAT_STORAGE_KEY);
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -88,6 +105,35 @@ export default function ChatPage() {
 
   return (
     <div className="flex h-full max-h-[calc(100svh-2rem)] flex-col">
+       <header className="flex items-center justify-between p-4 border-b">
+         <h2 className="text-xl font-bold">Chat</h2>
+         <div className="flex gap-2">
+           <Button variant="outline" size="sm" onClick={startNewChat}>
+             <PlusCircle className="mr-2 h-4 w-4" />
+             Chat Baru
+           </Button>
+           <AlertDialog>
+             <AlertDialogTrigger asChild>
+                <Button variant="destructive" size="sm" disabled={messages.length === 0}>
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  Hapus Chat
+                </Button>
+             </AlertDialogTrigger>
+             <AlertDialogContent>
+               <AlertDialogHeader>
+                 <AlertDialogTitle>Apakah kamu yakin?</AlertDialogTitle>
+                 <AlertDialogDescription>
+                    Tindakan ini akan menghapus semua riwayat percakapan secara permanen dari perangkat ini.
+                 </AlertDialogDescription>
+               </AlertDialogHeader>
+               <AlertDialogFooter>
+                 <AlertDialogCancel>Batal</AlertDialogCancel>
+                 <AlertDialogAction onClick={deleteChat}>Hapus</AlertDialogAction>
+               </AlertDialogFooter>
+             </AlertDialogContent>
+           </AlertDialog>
+         </div>
+       </header>
       <ScrollArea className="flex-1" ref={scrollAreaRef}>
         <div className="p-4 md:p-6 space-y-6">
           {messages.map((message, index) => (
