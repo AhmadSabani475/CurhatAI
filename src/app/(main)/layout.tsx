@@ -1,6 +1,8 @@
+
 'use client';
 
 import * as React from 'react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   BookHeart,
@@ -42,42 +44,54 @@ export default function MainLayout({
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton
+                asChild
                 href="/chat"
                 isActive={pathname.startsWith('/chat')}
                 tooltip="Chat"
               >
-                <MessageSquare />
-                <span>Chat</span>
+                <Link href="/chat">
+                  <MessageSquare />
+                  <span>Chat</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton
+                asChild
                 href="/dashboard"
                 isActive={pathname.startsWith('/dashboard')}
                 tooltip="Dashboard"
               >
-                <LayoutDashboard />
-                <span>Dashboard</span>
+                <Link href="/dashboard">
+                  <LayoutDashboard />
+                  <span>Dashboard</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton
+                asChild
                 href="/resources"
                 isActive={pathname.startsWith('/resources')}
                 tooltip="Resources"
               >
-                <BookHeart />
-                <span>Resources</span>
+                <Link href="/resources">
+                  <BookHeart />
+                  <span>Resources</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton
+                asChild
                 href="/history"
                 isActive={pathname.startsWith('/history')}
                 tooltip="History"
               >
-                <History />
-                <span>History</span>
+                <Link href="/history">
+                  <History />
+                  <span>History</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
